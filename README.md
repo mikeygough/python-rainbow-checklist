@@ -1,2 +1,2 @@
 # python-rainbow-checklist
-About ACS-1100-Intro-to-Programming
+ACS-1100-Intro-to-Programming
