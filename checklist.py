@@ -28,42 +28,86 @@ def list_all_items():
         print("{} {}".format(index, list_item))
         index += 1
 
-
+# MARK ITEM IN CHECKLIST WITH √
 def mark_completed(index):
     checklist[index] = '√' + checklist[index]
 
 
+# GET USER INPUT
 def user_input(prompt):
     user_input = input(prompt)
     return user_input
 
 
+# LOWERCASE USER INPUT
+def lower_user_input(user_input):
+    return user_input.lower()
+
+
+# VALIDATE INDEX EXISTS IN LIST
+def validate_index(index):
+    if len(checklist) == 0:
+        return True
+    elif index >= len(checklist):
+        return True
+    else:
+        return False
+    
+
+# MATCH FUNCTION CODE WITH AVAILABLE FUNCTIONS
 def select(function_code):
+    function_code = lower_user_input(function_code)
+    
     # Create item
-    if function_code == "C":
+    if function_code == "c":
         input_item = user_input("Input item: ")
         create(input_item)
         return True
 
     # Read item
-    elif function_code == "R":
-        item_index = int(user_input("Index Number? "))
+    elif function_code == "r":
+        item_index = int(user_input("Index number? "))
+        
+        while validate_index(item_index):
+            print("Invalid index! Please try again.")
+            item_index = int(user_input("Index number? "))
 
         # Remember that item_index must actually exist or our program will crash.
         print(read(item_index))
         return True
 
+    elif function_code == "u":
+        item_index = int(user_input("Index number? "))
+        
+        while validate_index(item_index):
+            print("Invalid index! Please try again.")
+            item_index = int(user_input("Index number? "))
+            
+        updated_item = user_input("Input updated item: ")
+        update(item_index, updated_item)
+        return True
+    
+    elif function_code == "d":
+        item_index = int(user_input("Index number? "))
+        
+        while validate_index(item_index):
+            print("Invalid index! Please try again.")
+            item_index = int(user_input("Index number? "))
+            
+        destroy(item_index)
+        return True
+    
     # Print all items
-    elif function_code == "P":
+    elif function_code == "p":
         list_all_items()
         return True
         
-    elif function_code == "Q":
+    elif function_code == "q":
         return False
 
     # Catch all
     else:
-        print("Unknown Option")
+        print("Unknown option")
 
 
 # TEST
@@ -102,5 +146,13 @@ def test():
 
 running = True
 while running:
-    selection = user_input("Press C to add to list, R to Read from list, P to display list, and Q to quit ")
+    selection = user_input("""
+Press C to Add to checklist
+Press R to Read from checklist
+Press U to Update item in checklist
+Press D to Delete item in checklist
+Press P to display checklist
+Press Q to quit
+
+---> """)
     running = select(selection)
