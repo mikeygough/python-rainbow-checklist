@@ -72,7 +72,6 @@ def select(function_code):
             print("Invalid index! Please try again.")
             item_index = int(user_input("Index number? "))
 
-        # Remember that item_index must actually exist or our program will crash.
         print(read(item_index))
         return True
 
