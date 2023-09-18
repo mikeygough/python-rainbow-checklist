@@ -31,7 +31,7 @@ def list_all_items():
 
 # MARK ITEM IN CHECKLIST WITH √
 def mark_completed(index):
-    checklist[index] = '√' + checklist[index]
+    checklist[index] += ' √'
 
 
 # GET USER INPUT
