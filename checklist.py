@@ -28,6 +28,7 @@ def list_all_items():
         print("{} {}".format(index, list_item))
         index += 1
 
+
 # MARK ITEM IN CHECKLIST WITH √
 def mark_completed(index):
     checklist[index] = '√' + checklist[index]
@@ -58,10 +59,16 @@ def validate_index(index):
 def select(function_code):
     function_code = lower_user_input(function_code)
     
-    # Create item
-    if function_code == "c":
+    # Add item
+    if function_code == "a":
         input_item = user_input("Input item: ")
         create(input_item)
+        return True
+    
+    # Mark item as complete
+    if function_code == "c":
+        item_index = int(user_input("Index number? "))
+        mark_completed(item_index)
         return True
 
     # Read item
@@ -146,7 +153,8 @@ def test():
 running = True
 while running:
     selection = user_input("""
-Press C to Add to checklist
+Press A to Add to checklist
+Press C to Mark item as complete
 Press R to Read from checklist
 Press U to Update item in checklist
 Press D to Delete item in checklist
